@@ -53,8 +53,11 @@ let build_cmi file =
     exit 1
 
 let print_intf f =
-  let {Cmi_format.cmi_sign;_} = Cmi_format.read_cmi f in
+  let {Cmi_format.cmi_sign;cmi_name;cmi_crcs;cmi_flags} = Cmi_format.read_cmi f in
   Printtyp.signature std_formatter cmi_sign;
+  (print_endline (Batteries.dump (
+                      "DEBUG:rule",
+                      cmi_sign,                      cmi_name,                      cmi_crcs,                      cmi_flags                                            )));
   print_flush ();
   print_newline ();
   flush stdout
